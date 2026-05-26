@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Runtime files
+pids/
+*.pid
+*.pid.lock
+
+# Build / coverage
+dist/
+build/
+coverage/
+
+# Temporary files
+tmp/
+temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Nodemon
+nodemon.json
+
+# Uploads
+uploads/
+
+# Database files
+*.sqlite
+*.db
+
+# Misc
+.cache/
+*.env
