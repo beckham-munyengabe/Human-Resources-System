@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const { generatePayroll, getPayrolls, getMyPayroll, updatePaymentStatus, getPayrollById } = require('../controllers/payrollController');
+const { protect, authorize } = require('../middleware/auth');
+router.post('/', protect, authorize('admin', 'hr_manager'), generatePayroll);
+router.get('/', protect, authorize('admin', 'hr_manager'), getPayrolls);
+router.get('/my', protect, getMyPayroll);
+router.get('/:id', protect, getPayrollById);
+router.put('/:id/payment', protect, authorize('admin', 'hr_manager'), updatePaymentStatus);
+module.exports = router;

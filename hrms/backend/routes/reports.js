@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const { generateEmployeeReport, generateAttendanceReport, generatePayrollReport, generateLeaveReport, getDashboardStats } = require('../controllers/reportController');
+const { protect, authorize } = require('../middleware/auth');
+router.get('/dashboard', protect, getDashboardStats);
+router.get('/employees', protect, authorize('admin', 'hr_manager'), generateEmployeeReport);
+router.get('/attendance', protect, authorize('admin', 'hr_manager'), generateAttendanceReport);
+router.get('/payroll', protect, authorize('admin', 'hr_manager'), generatePayrollReport);
+router.get('/leaves', protect, authorize('admin', 'hr_manager'), generateLeaveReport);
+module.exports = router;

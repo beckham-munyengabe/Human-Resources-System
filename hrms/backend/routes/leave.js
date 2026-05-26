@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const { applyLeave, getMyLeaves, getAllLeaves, updateLeaveStatus, getLeaveStats } = require('../controllers/leaveController');
+const { protect, authorize } = require('../middleware/auth');
+router.post('/', protect, applyLeave);
+router.get('/my', protect, getMyLeaves);
+router.get('/stats', protect, authorize('admin', 'hr_manager'), getLeaveStats);
+router.get('/', protect, authorize('admin', 'hr_manager'), getAllLeaves);
+router.put('/:id/status', protect, authorize('admin', 'hr_manager'), updateLeaveStatus);
+module.exports = router;

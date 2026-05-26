@@ -1,0 +1,12 @@
+const express = require('express');
+const router = express.Router();
+const { getEmployees, getEmployee, createEmployee, updateEmployee, deleteEmployee, getEmployeeStats } = require('../controllers/employeeController');
+const { protect, authorize } = require('../middleware/auth');
+const { uploadPhoto } = require('../middleware/upload');
+router.get('/stats', protect, authorize('admin', 'hr_manager'), getEmployeeStats);
+router.get('/', protect, getEmployees);
+router.get('/:id', protect, getEmployee);
+router.post('/', protect, authorize('admin', 'hr_manager'), uploadPhoto, createEmployee);
+router.put('/:id', protect, authorize('admin', 'hr_manager'), uploadPhoto, updateEmployee);
+router.delete('/:id', protect, authorize('admin', 'hr_manager'), deleteEmployee);
+module.exports = router;

@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const { checkIn, checkOut, getMyAttendance, getAllAttendance, getAttendanceById } = require('../controllers/attendanceController');
+const { protect, authorize } = require('../middleware/auth');
+router.post('/checkin', protect, checkIn);
+router.post('/checkout', protect, checkOut);
+router.get('/my', protect, getMyAttendance);
+router.get('/', protect, authorize('admin', 'hr_manager'), getAllAttendance);
+router.get('/employee/:employeeId', protect, authorize('admin', 'hr_manager'), getAttendanceById);
+module.exports = router;

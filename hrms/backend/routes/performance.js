@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const { createEvaluation, getAllEvaluations, getMyEvaluations, getEmployeeEvaluations, updateEvaluation } = require('../controllers/performanceController');
+const { protect, authorize } = require('../middleware/auth');
+router.post('/', protect, authorize('admin', 'hr_manager'), createEvaluation);
+router.get('/', protect, authorize('admin', 'hr_manager'), getAllEvaluations);
+router.get('/my', protect, getMyEvaluations);
+router.get('/employee/:employeeId', protect, getEmployeeEvaluations);
+router.put('/:id', protect, authorize('admin', 'hr_manager'), updateEvaluation);
+module.exports = router;
